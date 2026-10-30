@@ -75,7 +75,7 @@ export const projects: Project[] = [
     description:
       "An advanced calculator that eliminates the use of physical devices. It eliminates the need to spend money on physical devices and increases productivity at the same time.",
     divider: "mr-[20%]",
-    highlights: ["You won’t find anything here, go away"],
+    highlights: ["You won’t find anything here, go away ^_^"],
     tabs: [],
     stacks: [
       {
