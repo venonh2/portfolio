@@ -1,8 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-type Step = "idle" | "math" | "pets" | "last" | "results";
+type Step = "idle" | "math" | "pets" | "last" | "results" | "bye";
+
+const LINKEDIN_URL = "https://www.linkedin.com/";
 
 const option =
   "cursor-pointer text-lg font-semibold transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none md:text-2xl";
@@ -12,20 +14,25 @@ export default function HeroQuiz() {
 
   return (
     <>
-      <div className="mt-14 flex flex-col md:mt-16">
+      <div
+        className={`mt-14 flex flex-row items-center justify-between transition-[opacity,visibility] duration-300 md:mt-16 ${
+          step === "idle" ? "" : "invisible opacity-0"
+        }`}
+      >
         <button
           type="button"
-          onClick={() => setStep((s) => (s === "idle" ? "math" : s))}
-          className={`${option} self-start pl-3`}
+          onClick={() => setStep("math")}
+          className={`${option} pl-3`}
         >
           Yes, I’m
         </button>
-        <a
-          href="https://www.google.com"
-          className={`${option} mt-12 self-end pr-6 md:pr-16`}
+        <button
+          type="button"
+          onClick={() => setStep("bye")}
+          className={`${option} pr-6 md:pr-16`}
         >
           Nah, Lost interest!
-        </a>
+        </button>
       </div>
 
       {/* Fixed height so the top of the section never shifts between steps */}
@@ -34,6 +41,7 @@ export default function HeroQuiz() {
         {step === "pets" && <PetsQuestion onAnswer={() => setStep("last")} />}
         {step === "last" && <LastOne onAnswer={() => setStep("results")} />}
         {step === "results" && <TestResults />}
+        {step === "bye" && <Goodbye />}
       </div>
     </>
   );
@@ -43,6 +51,34 @@ type QuestionProps = { onAnswer: () => void };
 
 function Title({ children }: { children: React.ReactNode }) {
   return <h2 className="text-2xl font-bold md:text-4xl">{children}</h2>;
+}
+
+function Goodbye() {
+  const [count, setCount] = useState(3);
+
+  useEffect(() => {
+    if (count === 0) {
+      window.location.assign(LINKEDIN_URL);
+      return;
+    }
+    const timeout = setTimeout(() => setCount((c) => c - 1), 1000);
+    return () => clearTimeout(timeout);
+  }, [count]);
+
+  return (
+    <div key="bye" className="animate-fade-up flex flex-col">
+      <Title>
+        Ok, Maybe next <span className="underline decoration-1 underline-offset-[6px]">time</span>
+      </Title>
+
+      <p
+        aria-label={`Redirecting in ${count}`}
+        className="mt-20 flex size-12 items-center justify-center self-center rounded-full bg-foreground text-2xl font-bold text-background tabular-nums"
+      >
+        {Math.max(count, 1)}
+      </p>
+    </div>
+  );
 }
 
 function MathQuestion({ onAnswer }: QuestionProps) {
@@ -58,14 +94,25 @@ function MathQuestion({ onAnswer }: QuestionProps) {
         <button type="button" onClick={onAnswer} className={`${option} absolute top-6 left-[18%] text-2xl`}>
           4
         </button>
-        <button type="button" onClick={onAnswer} className={`${option} absolute top-0 right-[20%] text-2xl`}>
-          8
-        </button>
-        <button type="button" onClick={onAnswer} className={`${option} absolute top-16 left-1/2 -translate-x-1/2 text-2xl`}>
-          6
-        </button>
+        <WrongAnswer className="absolute top-0 right-[20%]">8</WrongAnswer>
+        <WrongAnswer className="absolute top-16 left-1/2 -translate-x-1/2">6</WrongAnswer>
       </div>
     </div>
+  );
+}
+
+function WrongAnswer({ className, children }: { className: string; children: React.ReactNode }) {
+  const [shaking, setShaking] = useState(false);
+
+  return (
+    <button
+      type="button"
+      onClick={() => setShaking(true)}
+      onAnimationEnd={() => setShaking(false)}
+      className={`${option} ${className} text-2xl ${shaking ? "animate-shake" : ""}`}
+    >
+      {children}
+    </button>
   );
 }
 
