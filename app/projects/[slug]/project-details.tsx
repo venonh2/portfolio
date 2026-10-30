@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
 import StackDiagram from "@/components/project-details/StackDiagram";
 import StackTabs from "@/components/project-details/StackTabs";
-import { getProject } from "@/lib/projects";
+import { getProject, stackLabels } from "@/lib/projects";
 
 export async function ProjectDetails({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) notFound();
+
+  const labels = stackLabels.filter((label) => (project.tabs ?? stackLabels).includes(label));
 
   return (
     <>
@@ -21,17 +23,27 @@ export async function ProjectDetails({ params }: { params: Promise<{ slug: strin
         </ul>
       )}
 
-      {project.stacks && (
+      {labels.length > 0 && (
         <div className="mt-10">
           <StackTabs
-            tabs={project.stacks.map((stack) => ({
-              label: stack.label,
-              content: (
-                <StackDiagram root={stack.root} items={stack.items}>
-                  {stack.extra}
-                </StackDiagram>
-              ),
-            }))}
+            defaultTab={Math.max(
+              labels.findIndex((label) => project.stacks?.some((stack) => stack.label === label)),
+              0,
+            )}
+            tabs={labels.map((label) => {
+              const stack = project.stacks?.find((s) => s.label === label);
+              return {
+                label,
+                hideCrown: stack ? stack.hideCrown : true,
+                content: stack ? (
+                  <StackDiagram root={stack.root} items={stack.items}>
+                    {stack.extra}
+                  </StackDiagram>
+                ) : (
+                  <p className="text-base md:text-lg">Nothing here yet, Go away!</p>
+                ),
+              };
+            })}
           />
         </div>
       )}

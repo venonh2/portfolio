@@ -15,7 +15,7 @@ export default function HeroQuiz() {
   return (
     <>
       <div
-        className={`mt-14 flex flex-row items-center justify-between transition-[opacity,visibility] duration-300 md:mt-16 ${
+        className={`mt-14 flex flex-row items-center justify-evenly transition-[opacity,visibility] duration-300 md:mt-16 ${
           step === "idle" ? "" : "invisible opacity-0"
         }`}
       >

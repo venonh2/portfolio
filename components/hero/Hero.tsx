@@ -10,7 +10,7 @@ export default function Hero() {
       </p>
 
       <h1 className="mt-16 pl-2 text-5xl font-bold tracking-tight md:mt-20 md:text-8xl">
-        But Are You <span className="text-accent">Worth</span>?
+        Are you read? Let&apos;s get <span className="text-accent">Started</span>
       </h1>
 
       <HeroQuiz />

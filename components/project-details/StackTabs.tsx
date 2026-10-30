@@ -6,10 +6,11 @@ import { useId, useState } from "react";
 type Tab = {
   label: string;
   content: React.ReactNode;
+  hideCrown?: boolean;
 };
 
-export default function StackTabs({ tabs }: { tabs: Tab[] }) {
-  const [active, setActive] = useState(0);
+export default function StackTabs({ tabs, defaultTab = 0 }: { tabs: Tab[]; defaultTab?: number }) {
+  const [active, setActive] = useState(defaultTab);
   const id = useId();
 
   return (
@@ -31,7 +32,7 @@ export default function StackTabs({ tabs }: { tabs: Tab[] }) {
             {tab.label}
           </button>
         ))}
-        <Crown />
+        {!tabs[active].hideCrown && <Crown />}
       </div>
 
       {tabs.map((tab, i) => (

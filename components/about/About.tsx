@@ -21,6 +21,7 @@ export default function About() {
       <div className="mt-12 flex flex-col gap-4 pl-3 text-base md:mt-16 md:gap-5 md:text-lg">
         <p>Brendow E. R</p>
         <p>Degree in Software engineering</p>
+        <p>Course in Rhetoric: University of Harvard - AESTHINT15</p>
 
         <h3 className="mt-2 font-semibold underline decoration-1 underline-offset-4">
           Contact info
@@ -43,8 +44,7 @@ export default function About() {
         {/* Shrinks slightly on narrow phones so each forced line still fits */}
         <p className="whitespace-nowrap text-center text-[min(30px,calc((100vw-40px)/10))] font-bold leading-tight text-accent md:text-[42px]">
           Not the best
-          <br />
-          developer out there,
+          out there,
           <br />
           but one of the great
           <br />
