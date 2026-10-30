@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 type Project = {
   title: string;
   description: string;
+  href?: string;
   // Each divider sits at a different offset, as in the reference layout
   divider: string;
 };
@@ -16,6 +19,7 @@ const projects: Project[] = [
     title: "Iris Security",
     description:
       "Security App for users to see cameras, alarms and sensors related events, and much more.",
+    href: "/projects/iris-security",
     divider: "ml-[40%]",
   },
   {
@@ -56,7 +60,18 @@ export default function Projects() {
         {projects.map((project) => (
           <li key={project.title} className="animate-fade-in-view">
             <article>
-              <h3 className="text-lg font-semibold md:text-2xl">{project.title}</h3>
+              <h3 className="text-lg font-semibold md:text-2xl">
+                {project.href ? (
+                  <Link
+                    href={project.href}
+                    className="transition-colors hover:text-accent focus-visible:text-accent focus-visible:outline-none"
+                  >
+                    {project.title}
+                  </Link>
+                ) : (
+                  project.title
+                )}
+              </h3>
               <p className="mt-1 text-justify text-sm leading-4.75 tracking-wide md:mt-2 md:text-base md:leading-6">
                 {project.description}
               </p>
