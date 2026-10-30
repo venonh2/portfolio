@@ -12,32 +12,32 @@ const projects: Project[] = [
   {
     title: "Calculator in JS",
     description:
-      "An advanced calculator that eliminates the use of psychical devices. It elimates the need of spending money in the psychical device and increasing the productive at the same time.",
+      "An advanced calculator that eliminates the use of physical devices. It eliminates the need to spend money on physical devices and increases productivity at the same time.",
     divider: "mr-[20%]",
   },
   {
     title: "Iris Security",
     description:
-      "Security App for users to see cameras, alarms and sensors related events, and much more.",
+      "Security App for users to see cameras, alarms and sensor-related events, and much more.",
     href: "/projects/iris-security",
     divider: "ml-[40%]",
   },
   {
     title: "Iris Guard Tour",
     description:
-      "Offline first. What if your security team had an app that register the percurse during a ronda? Really nice project.",
+      "Offline first. What if your security team had an app that registers the percurse during a ronda? Really nice project.",
     divider: "mx-[20%]",
   },
   {
     title: "Approva Crédito",
     description:
-      "Do you know that the credit validation in Brazil when buying a house with goverment subsidie can take weeks?",
+      "Do you know that the credit validation in Brazil, when buying a house with a government subsidy may take weeks?",
     divider: "ml-[32%] mr-[8%]",
   },
   {
     title: "Alirok.com",
     description:
-      "Around the world people buy and sell products at scale, containers, trucks full of load, etc. If you need to bring a container full of products from China, where and how would you do that? At Alirok i helped that be possible and simple.",
+      "Around the world, people buy and sell products at scale, containers, trucks full of loads, etc. If you need to bring a container full of products from China, where and how would you do that? At Alirok i helped that be possible and simple.",
     divider: "mr-[42%]",
   },
 ];

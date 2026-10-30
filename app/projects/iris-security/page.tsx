@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import IrisMobileStack from "@/components/project-details/IrisMobileStack";
+import StackDiagram from "@/components/project-details/StackDiagram";
 import StackTabs from "@/components/project-details/StackTabs";
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function IrisSecurityPage() {
         Security App for users to see cameras, alarms and sensors related events, and much more.
       </p>
 
-      <ul className="mt-6 list-disc space-y-1 pl-[18px] text-base leading-tight md:text-lg">
+      <ul className="mt-6 list-disc space-y-1 pl-4.5 text-base leading-tight md:text-lg">
         {highlights.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -39,8 +39,42 @@ export default function IrisSecurityPage() {
       <div className="mt-10">
         <StackTabs
           tabs={[
-            { label: "Mobile", content: <IrisMobileStack /> },
-            { label: "Backend", content: <p className="text-base">Coming soon.</p> },
+            {
+              label: "Mobile",
+              content: (
+                <StackDiagram
+                  root="React Native"
+                  items={[
+                    "RTSP protocol with Native Modules",
+                    "CI/CD With App Center ( it no longer exists )",
+                    "Unit tests with ... Can you guess? I’m just Jesting don’t worry",
+                  ]}
+                >
+                  <p className="mt-14 pl-[15%]">Over 10 flavors for different customers</p>
+                </StackDiagram>
+              ),
+            },
+            {
+              label: "Backend",
+              content: (
+                <StackDiagram
+                  root=".NET"
+                  items={[
+                    <>
+                      Different Microsservices
+                      <br />( cameras, events, clients )
+                    </>,
+                    "Handling over 50 QPS with Peak of 120 QPS",
+                    "Unit tests with xUnit",
+                  ]}
+                >
+                  <ul className="mt-10 list-disc space-y-1 pl-4.5">
+                    <li>Over 100 Stored procedures</li>
+                    <li>50+ Triggers</li>
+                  </ul>
+                </StackDiagram>
+              ),
+            },
           ]}
         />
       </div>
